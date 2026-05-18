@@ -7,6 +7,7 @@ use App\Http\Resources\BookResource;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use OpenApi\Attributes as OA;
 
 class BookController extends Controller
 {
@@ -26,7 +27,7 @@ class BookController extends Controller
 
         $book = Book::create($data);
 
-        return new BookResource($book);
+        return (new BookResource($book))->response()->setStatusCode(201);
     }
 
     public function show(Book $book)
