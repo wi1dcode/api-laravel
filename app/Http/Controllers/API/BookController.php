@@ -49,11 +49,15 @@ class BookController extends Controller
 
         $book->update($data);
 
+        Cache::forget('book-' . $book->id);
+
         return new BookResource($book);
     }
 
     public function destroy(Book $book)
     {
+        Cache::forget('book-' . $book->id);
+
         $book->delete();
 
         return response()->json(null, 204);
