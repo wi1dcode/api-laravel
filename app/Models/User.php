@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
@@ -32,6 +33,12 @@ class User extends Authenticatable
     {
         return !preg_match('/@(gmail|yahoo|hotmail|live|outlook)\./', $this->email);
     }
+
+    public function shoppingList(): HasOne
+    {
+        return $this->hasOne(ShoppingList::class);
+    }   
+    
     protected function casts(): array
     {
         return [

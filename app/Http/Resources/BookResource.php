@@ -15,10 +15,10 @@ class BookResource extends JsonResource
             'summary' => $this->summary,
             'isbn' => $this->isbn,
             '_links' => [
-                'self' => route('books.show', $this->id),
-                'update' => route('books.update', $this->id),
-                'delete' => route('books.destroy', $this->id),
-                'all' => route('books.index'),
+                'self' => ['href' => route('books.show', $this->id), 'method' => 'GET'],
+                'update' => ['href' => route('books.update', $this->id), 'method' => 'PUT'],
+                'delete' => ['href' => route('books.destroy', $this->id), 'method' => 'DELETE'],
+                'all' => ['href' => route('books.index'), 'method' => 'GET'],
             ],
         ];
     }
