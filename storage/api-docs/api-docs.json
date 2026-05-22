@@ -7,18 +7,18 @@
     },
     "servers": [
         {
-            "url": "http://localhost:8000",
+            "url": "http://localhost:8000/api/v1",
             "description": "Serveur local"
         }
     ],
     "paths": {
-        "/api/v1/register": {
+        "/register": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Inscription d’un utilisateur",
-                "operationId": "a9cec35b4edeccaf2a37ea97109738f3",
+                "operationId": "e693dea5dcf1380041e25066f33b3b4c",
                 "parameters": [
                     {
                         "name": "Accept",
@@ -79,13 +79,13 @@
                 }
             }
         },
-        "/api/v1/login": {
+        "/login": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Connexion d’un utilisateur",
-                "operationId": "9b1e5b4c7213418d743ccb6c85c528a7",
+                "operationId": "ced2a5058dc4477012760c2d9091acad",
                 "parameters": [
                     {
                         "name": "Accept",
@@ -144,13 +144,13 @@
                 }
             }
         },
-        "/api/v1/logout": {
+        "/logout": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Déconnexion de l’utilisateur",
-                "operationId": "77c8d4d4c7f035a3e5edbbe581feb3bd",
+                "operationId": "1ded7501c73b995e0a62a5340df419d4",
                 "parameters": [
                     {
                         "name": "Accept",
@@ -193,13 +193,13 @@
                 ]
             }
         },
-        "/api/v1/books": {
+        "/books": {
             "get": {
                 "tags": [
                     "Books"
                 ],
                 "summary": "Lister les livres",
-                "operationId": "18a71e8bf0ef1879f7bcd5f1d37cdde9",
+                "operationId": "950bb083a1f731e89d22b7a9790c4a25",
                 "parameters": [
                     {
                         "name": "Accept",
@@ -210,7 +210,56 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Liste des livres"
+                        "description": "Liste des livres",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "data": [
+                                        {
+                                            "title": "Dune",
+                                            "author": "FRANK HERBERT",
+                                            "summary": "Épopée de science-fiction centrée sur la planète Arrakis.",
+                                            "isbn": "9780441013593",
+                                            "_links": {
+                                                "self": {
+                                                    "href": "http://localhost:8000/api/v1/books/1",
+                                                    "method": "GET"
+                                                },
+                                                "update": {
+                                                    "href": "http://localhost:8000/api/v1/books/1",
+                                                    "method": "PUT"
+                                                },
+                                                "delete": {
+                                                    "href": "http://localhost:8000/api/v1/books/1",
+                                                    "method": "DELETE"
+                                                },
+                                                "all": {
+                                                    "href": "http://localhost:8000/api/v1/books",
+                                                    "method": "GET"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "links": {
+                                        "first": "http://localhost:8000/api/v1/books?page=1",
+                                        "last": "http://localhost:8000/api/v1/books?page=1",
+                                        "prev": null,
+                                        "next": null
+                                    },
+                                    "meta": {
+                                        "current_page": 1,
+                                        "from": 1,
+                                        "last_page": 1,
+                                        "links": [],
+                                        "path": "http://localhost:8000/api/v1/books",
+                                        "per_page": 2,
+                                        "to": 1,
+                                        "total": 1
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -219,7 +268,7 @@
                     "Books"
                 ],
                 "summary": "Créer un livre",
-                "operationId": "86a1a967fdbb697c07f2cb966227f190",
+                "operationId": "61a5c3e9aeaa647be55e07c26f6f2a47",
                 "parameters": [
                     {
                         "name": "Accept",
@@ -270,7 +319,38 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Livre créé"
+                        "description": "Livre créé",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "data": {
+                                        "title": "Dune",
+                                        "author": "FRANK HERBERT",
+                                        "summary": "Épopée de science-fiction centrée sur la planète Arrakis.",
+                                        "isbn": "9780441013593",
+                                        "_links": {
+                                            "self": {
+                                                "href": "http://localhost:8000/api/v1/books/1",
+                                                "method": "GET"
+                                            },
+                                            "update": {
+                                                "href": "http://localhost:8000/api/v1/books/1",
+                                                "method": "PUT"
+                                            },
+                                            "delete": {
+                                                "href": "http://localhost:8000/api/v1/books/1",
+                                                "method": "DELETE"
+                                            },
+                                            "all": {
+                                                "href": "http://localhost:8000/api/v1/books",
+                                                "method": "GET"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "401": {
                         "description": "Non authentifié"
@@ -286,13 +366,13 @@
                 ]
             }
         },
-        "/api/v1/books/{book}": {
+        "/books/{book}": {
             "get": {
                 "tags": [
                     "Books"
                 ],
                 "summary": "Afficher un livre",
-                "operationId": "f2b3ef342df20d5bc29ac279a8b079a8",
+                "operationId": "e303de4f8aac132c74f5fb35bb051504",
                 "parameters": [
                     {
                         "name": "Accept",
@@ -309,7 +389,38 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Livre trouvé"
+                        "description": "Livre trouvé",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "data": {
+                                        "title": "Dune",
+                                        "author": "FRANK HERBERT",
+                                        "summary": "Épopée de science-fiction centrée sur la planète Arrakis.",
+                                        "isbn": "9780441013593",
+                                        "_links": {
+                                            "self": {
+                                                "href": "http://localhost:8000/api/v1/books/1",
+                                                "method": "GET"
+                                            },
+                                            "update": {
+                                                "href": "http://localhost:8000/api/v1/books/1",
+                                                "method": "PUT"
+                                            },
+                                            "delete": {
+                                                "href": "http://localhost:8000/api/v1/books/1",
+                                                "method": "DELETE"
+                                            },
+                                            "all": {
+                                                "href": "http://localhost:8000/api/v1/books",
+                                                "method": "GET"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "Livre introuvable"
@@ -321,7 +432,7 @@
                     "Books"
                 ],
                 "summary": "Modifier un livre",
-                "operationId": "25b97cb92b3cebc9959946456783c587",
+                "operationId": "52d9c14d6b605fb50d6de448814577a8",
                 "parameters": [
                     {
                         "name": "Accept",
@@ -378,7 +489,38 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Livre modifié"
+                        "description": "Livre modifié",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "data": {
+                                        "title": "Dune Messiah",
+                                        "author": "FRANK HERBERT",
+                                        "summary": "Suite de Dune.",
+                                        "isbn": "9780441172696",
+                                        "_links": {
+                                            "self": {
+                                                "href": "http://localhost:8000/api/v1/books/1",
+                                                "method": "GET"
+                                            },
+                                            "update": {
+                                                "href": "http://localhost:8000/api/v1/books/1",
+                                                "method": "PUT"
+                                            },
+                                            "delete": {
+                                                "href": "http://localhost:8000/api/v1/books/1",
+                                                "method": "DELETE"
+                                            },
+                                            "all": {
+                                                "href": "http://localhost:8000/api/v1/books",
+                                                "method": "GET"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "401": {
                         "description": "Non authentifié"
@@ -401,7 +543,7 @@
                     "Books"
                 ],
                 "summary": "Supprimer un livre",
-                "operationId": "58bdb0d457f28e9ec8c1e3d2278c667d",
+                "operationId": "80c9c06b99a03ff1dffeb717710989f8",
                 "parameters": [
                     {
                         "name": "Accept",
