@@ -27,7 +27,7 @@ class BookController extends Controller
 
         $book = Book::create($data);
 
-        return (new BookResource($book))->response()->setStatusCode(201);
+        return new BookResource($book);
     }
 
     public function show(Book $book)
