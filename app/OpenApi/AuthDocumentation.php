@@ -7,7 +7,7 @@ use OpenApi\Attributes as OA;
 class AuthDocumentation
 {
     #[OA\Post(
-        path: '/api/v1/register',
+        path: '/register',
         summary: 'Inscription d’un utilisateur',
         tags: ['Auth'],
         parameters: [
@@ -42,7 +42,7 @@ class AuthDocumentation
     }
 
     #[OA\Post(
-        path: '/api/v1/login',
+        path: '/login',
         summary: 'Connexion d’un utilisateur',
         tags: ['Auth'],
         parameters: [
@@ -77,7 +77,7 @@ class AuthDocumentation
     }
 
     #[OA\Post(
-        path: '/api/v1/logout',
+        path: '/logout',
         summary: 'Déconnexion de l’utilisateur',
         security: [['bearerAuth' => []]],
         tags: ['Auth'],

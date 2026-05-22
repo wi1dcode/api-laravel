@@ -7,14 +7,51 @@ use OpenApi\Attributes as OA;
 class BookDocumentation
 {
     #[OA\Get(
-        path: '/api/v1/books',
+        path: '/books',
         summary: 'Lister les livres',
         tags: ['Books'],
         parameters: [
             new OA\Parameter(name: 'Accept', in: 'header', required: true, example: 'application/json'),
         ],
         responses: [
-            new OA\Response(response: 200, description: 'Liste des livres'),
+            new OA\Response(
+                response: 200,
+                description: 'Liste des livres',
+                content: new OA\JsonContent(
+                    example: [
+                        'data' => [
+                            [
+                                'title' => 'Dune',
+                                'author' => 'FRANK HERBERT',
+                                'summary' => 'Épopée de science-fiction centrée sur la planète Arrakis.',
+                                'isbn' => '9780441013593',
+                                '_links' => [
+                                    'self' => ['href' => 'http://localhost:8000/api/v1/books/1', 'method' => 'GET'],
+                                    'update' => ['href' => 'http://localhost:8000/api/v1/books/1', 'method' => 'PUT'],
+                                    'delete' => ['href' => 'http://localhost:8000/api/v1/books/1', 'method' => 'DELETE'],
+                                    'all' => ['href' => 'http://localhost:8000/api/v1/books', 'method' => 'GET'],
+                                ],
+                            ],
+                        ],
+                        'links' => [
+                            'first' => 'http://localhost:8000/api/v1/books?page=1',
+                            'last' => 'http://localhost:8000/api/v1/books?page=1',
+                            'prev' => null,
+                            'next' => null,
+                        ],
+                        'meta' => [
+                            'current_page' => 1,
+                            'from' => 1,
+                            'last_page' => 1,
+                            'links' => [],
+                            'path' => 'http://localhost:8000/api/v1/books',
+                            'per_page' => 2,
+                            'to' => 1,
+                            'total' => 1,
+                        ],
+                    ]
+                )
+            ),
         ]
     )]
     public function index(): void
@@ -22,7 +59,7 @@ class BookDocumentation
     }
 
     #[OA\Post(
-        path: '/api/v1/books',
+        path: '/books',
         summary: 'Créer un livre',
         security: [['bearerAuth' => []]],
         tags: ['Books'],
@@ -43,7 +80,26 @@ class BookDocumentation
             )
         ),
         responses: [
-            new OA\Response(response: 201, description: 'Livre créé'),
+            new OA\Response(
+                response: 201,
+                description: 'Livre créé',
+                content: new OA\JsonContent(
+                    example: [
+                        'data' => [
+                            'title' => 'Dune',
+                            'author' => 'FRANK HERBERT',
+                            'summary' => 'Épopée de science-fiction centrée sur la planète Arrakis.',
+                            'isbn' => '9780441013593',
+                            '_links' => [
+                                'self' => ['href' => 'http://localhost:8000/api/v1/books/1', 'method' => 'GET'],
+                                'update' => ['href' => 'http://localhost:8000/api/v1/books/1', 'method' => 'PUT'],
+                                'delete' => ['href' => 'http://localhost:8000/api/v1/books/1', 'method' => 'DELETE'],
+                                'all' => ['href' => 'http://localhost:8000/api/v1/books', 'method' => 'GET'],
+                            ],
+                        ],
+                    ]
+                )
+            ),
             new OA\Response(response: 401, description: 'Non authentifié'),
             new OA\Response(response: 422, description: 'Erreur de validation'),
         ]
@@ -53,7 +109,7 @@ class BookDocumentation
     }
 
     #[OA\Get(
-        path: '/api/v1/books/{book}',
+        path: '/books/{book}',
         summary: 'Afficher un livre',
         tags: ['Books'],
         parameters: [
@@ -61,7 +117,26 @@ class BookDocumentation
             new OA\Parameter(name: 'book', in: 'path', required: true, example: 1),
         ],
         responses: [
-            new OA\Response(response: 200, description: 'Livre trouvé'),
+            new OA\Response(
+                response: 200,
+                description: 'Livre trouvé',
+                content: new OA\JsonContent(
+                    example: [
+                        'data' => [
+                            'title' => 'Dune',
+                            'author' => 'FRANK HERBERT',
+                            'summary' => 'Épopée de science-fiction centrée sur la planète Arrakis.',
+                            'isbn' => '9780441013593',
+                            '_links' => [
+                                'self' => ['href' => 'http://localhost:8000/api/v1/books/1', 'method' => 'GET'],
+                                'update' => ['href' => 'http://localhost:8000/api/v1/books/1', 'method' => 'PUT'],
+                                'delete' => ['href' => 'http://localhost:8000/api/v1/books/1', 'method' => 'DELETE'],
+                                'all' => ['href' => 'http://localhost:8000/api/v1/books', 'method' => 'GET'],
+                            ],
+                        ],
+                    ]
+                )
+            ),
             new OA\Response(response: 404, description: 'Livre introuvable'),
         ]
     )]
@@ -70,7 +145,7 @@ class BookDocumentation
     }
 
     #[OA\Put(
-        path: '/api/v1/books/{book}',
+        path: '/books/{book}',
         summary: 'Modifier un livre',
         security: [['bearerAuth' => []]],
         tags: ['Books'],
@@ -92,7 +167,26 @@ class BookDocumentation
             )
         ),
         responses: [
-            new OA\Response(response: 200, description: 'Livre modifié'),
+            new OA\Response(
+                response: 200,
+                description: 'Livre modifié',
+                content: new OA\JsonContent(
+                    example: [
+                        'data' => [
+                            'title' => 'Dune Messiah',
+                            'author' => 'FRANK HERBERT',
+                            'summary' => 'Suite de Dune.',
+                            'isbn' => '9780441172696',
+                            '_links' => [
+                                'self' => ['href' => 'http://localhost:8000/api/v1/books/1', 'method' => 'GET'],
+                                'update' => ['href' => 'http://localhost:8000/api/v1/books/1', 'method' => 'PUT'],
+                                'delete' => ['href' => 'http://localhost:8000/api/v1/books/1', 'method' => 'DELETE'],
+                                'all' => ['href' => 'http://localhost:8000/api/v1/books', 'method' => 'GET'],
+                            ],
+                        ],
+                    ]
+                )
+            ),
             new OA\Response(response: 401, description: 'Non authentifié'),
             new OA\Response(response: 404, description: 'Livre introuvable'),
             new OA\Response(response: 422, description: 'Erreur de validation'),
@@ -103,7 +197,7 @@ class BookDocumentation
     }
 
     #[OA\Delete(
-        path: '/api/v1/books/{book}',
+        path: '/books/{book}',
         summary: 'Supprimer un livre',
         security: [['bearerAuth' => []]],
         tags: ['Books'],

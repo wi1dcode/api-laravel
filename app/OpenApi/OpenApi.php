@@ -10,7 +10,7 @@ use OpenApi\Attributes as OA;
     description: 'Documentation de l’API Laravel'
 )]
 #[OA\Server(
-    url: 'http://localhost:8000',
+    url: 'http://localhost:8000/api/v1',
     description: 'Serveur local'
 )]
 #[OA\SecurityScheme(
